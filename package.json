@@ -1,0 +1,19 @@
+{
+  "name": "deliverables",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frostyblok/Deliverables.git"
+  },
+  "author": "Oluwakunle Fakorede",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frostyblok/Deliverables/issues"
+  },
+  "homepage": "https://github.com/frostyblok/Deliverables#readme"
+}
