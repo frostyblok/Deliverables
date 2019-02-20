@@ -19,7 +19,7 @@ export default {
       price: {
         type: Sequelize.INTEGER
       },
-      imgUrl: {
+      img_url: {
         type: Sequelize.STRING,
         allowNull: false
       },

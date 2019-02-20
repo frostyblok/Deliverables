@@ -1,4 +1,3 @@
-'use strict';
 export default (sequelize, DataTypes) => {
   const House = sequelize.define(
     'House',
@@ -19,12 +18,13 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      imgUrl: {
+      img_url: {
         type: DataTypes.STRING,
         allowNull: false
       }
     }, {});
   House.associate = (models) => {
+    House.hasMany(models.Order, { foreignKey: 'itme_id' });
     // associations can be defined here
   };
   return House;

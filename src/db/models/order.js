@@ -8,18 +8,21 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {});
   Order.associate = (models) => {
+    // associations can be defined here
     Order.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user',
+      foreignKey: 'user_id',
+      onDelete: 'CASCADE'
+    });
+    Order.belongsTo(models.House, {
+      foreignKey: 'item_id',
       onDelete: 'CASCADE'
     })
-    // associations can be defined here
   };
   return Order;
 };

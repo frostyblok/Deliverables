@@ -39,35 +39,11 @@ export default (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          isByteLength: {
-            args: 8,
-            msg: 'Password must be at least 8 characters long'
-          },
-          isAlphanumeric(value) {
-            value = value.trim();
-            if (!/[^\s\\]/.test(value)) {
-              throw new Error('Password should be alphanumeric e.g. abc123');
-            }
-          }
-        }
       }
     },
-    {
-      hooks: {
-        beforeCreate(user) {
-          const rawPassword = user.password;
-          user.password = bcrypt.hashSync(rawPassword, 10);
-        },
-        beforeUpdate(user) {
-          const rawPassword = user.password;
-          user.password = bcrypt.hashSync(rawPassword, 10);
-        }
-      }
-    }
   );
   User.associate = (models) => {
-    User.hasMany(models.Order, { foreignKey: 'userId', as: 'orders' });
+    User.hasMany(models.Order, { foreignKey: 'user_id' });
   };
   return User;
 };
