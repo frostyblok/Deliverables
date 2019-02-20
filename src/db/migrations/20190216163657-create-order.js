@@ -13,7 +13,7 @@ export default {
       item_name: {
         type: Sequelize.STRING
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
