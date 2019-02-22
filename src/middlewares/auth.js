@@ -1,4 +1,7 @@
 import jwt from 'jsonwebtoken';
+import Model from '../db/models';
+
+const { Order} = Model;
 
 class Auth {
   static async verifyUser(req, res, next) {
@@ -28,14 +31,38 @@ class Auth {
   }
 
   static async checkUser(req, res, next) {
+    const { id } = req.params;
+    const foundOrder = await Order.findOne({
+      where: { id }
+    });
+    if (!foundOrder) {
+      return res.status(404).send({
+        status: 'Fail',
+        message: 'No order with that Id found'
+      });
+    }
+    const { user_id } = foundOrder.dataValues;
     const decodedId = parseInt(req.decoded.id, 10);
-    const paramsId = parseInt(req.params.id, 10);
-    if (decodedId === paramsId) {
+    if (decodedId === user_id) {
       return next();
     }
     return res.status(403).json({
       status: 'Fail',
-      message: 'You are not allowed to view this pagee',
+      message: 'You are not allowed to view this page',
+    });
+  }
+
+  static async confirmUser(req, res, next) {
+    const { id: user_id } = req.params;
+    const { id: decodedId } = req.decoded;
+    if (decodedId == user_id) {
+      return next();
+    }
+    return res.status(403).json({
+      status: 'Fail',
+      message: 'You are not allowed to view this page',
     });
   }
 }
+
+export default Auth;

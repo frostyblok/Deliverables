@@ -49,6 +49,10 @@ class User {
         message: 'email is incorrect'
       });
     }
+    const userPayload = {
+      id: user.id,
+      username: user.username
+    };
     const comparePassword = bcrypt.compareSync(password, user.dataValues.password);
     if (!comparePassword) {
       return res.status(400).send({
@@ -57,9 +61,11 @@ class User {
       });
     }
     const user_name = user.dataValues.username;
+    const token = await generateToken(userPayload);
     return res.status(200).send({
       status: 'Success',
-      message: `Welcome back, ${user_name}`
+      message: `Welcome back, ${user_name}`,
+      token
     });
   }
 }

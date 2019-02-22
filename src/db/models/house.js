@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
       }
     }, {});
   House.associate = (models) => {
-    House.hasMany(models.Order, { foreignKey: 'itme_id' });
+    House.hasMany(models.Order, { foreignKey: 'item_id' });
     // associations can be defined here
   };
   return House;
