@@ -17,11 +17,13 @@ export default (sequelize, DataTypes) => {
     // associations can be defined here
     Order.belongsTo(models.User, {
       foreignKey: 'user_id',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      as: 'user'
     });
     Order.belongsTo(models.House, {
       foreignKey: 'item_id',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      as: 'item(s)'
     })
   };
   return Order;
